@@ -43,8 +43,10 @@ with:
 For downstream analyses, estimated abundances of the myeloid leukemic populations were normalized to sum to 1 per sample. Lymphoid and erythroid–megakaryocytic lineages were excluded.
 
 Processed mixtures: 
-[TCGA-LAML (with FAB annotation)]() 
-[BEAT-AML (with FAB annotation)]()
+
+[TCGA-LAML (with FAB annotation)](https://github.com/FionaMoon/Inflammation-Shapes-Developmental-Hierarchy-of-Human-Acute-Myeloid-Leukemia/blob/main/Data/CIBERSORTx/TCGA-LAML_Clinic_and_decon_mye.RData) 
+
+[BEAT-AML (with FAB annotation)](https://github.com/FionaMoon/Inflammation-Shapes-Developmental-Hierarchy-of-Human-Acute-Myeloid-Leukemia/blob/main/Data/CIBERSORTx/BEAT-AML_decon_clinical_order.csv)
 
 ### Figure 2 — RBM47 emerges as a top-ranked RNA-binding protein associated with inflammation and AML hierarchy dynamics
 
