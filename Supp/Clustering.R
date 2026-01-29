@@ -6,7 +6,7 @@ library(dplyr)
 library(PCAtools)
 library(ggthemes)
 
-setwd("D:/备份盘/PeiLab/工作/刘丽娜老师/AML-CellLine")
+setwd("D:/AML-CellLine")
 
 ## -------------------------------
 ## Load expression data
@@ -36,7 +36,7 @@ data_select <- data_mye %>%
 ## Load gene set (Cluster 1 genes)
 ## -------------------------------
 cluster1 <- fread(
-  "D:/备份盘/PeiLab/工作/刘丽娜老师/Sequencing_Analysis/2023_Pei_CD/cluste_all_DH_up_gene-ordered_mannually.csv",
+  "D:/Sequencing_Analysis/2023_Pei_CD/cluste_all_DH_up_gene-ordered_mannually.csv",
   data.table = FALSE
 )
 
@@ -101,3 +101,4 @@ biplot(
   theme_few(base_size = 14) +
   ggtitle("PCA of AML Cell Lines (Hierarchical clustering)")
 dev.off()
+
