@@ -3,7 +3,7 @@
 rm(list = ls())
 gc()
 
-file_path = "D:/备份盘/PeiLab/工作/刘丽娜老师/Sequencing_Analysis/2023_Pei_CD"
+file_path = "D:/Sequencing_Analysis/2023_Pei_CD"
 setwd(file_path)
 
 library(Seurat)
