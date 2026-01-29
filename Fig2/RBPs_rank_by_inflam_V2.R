@@ -6,7 +6,6 @@ library(data.table)
 library(dplyr)
 
 ## set working dir
-# setwd("/Volumes/UBUNTU 22_0/刘老师的数据/Sequencing_Analysis")
 setwd("F:/xx/Sequencing_Analysis")
 
 # Load RBPs
