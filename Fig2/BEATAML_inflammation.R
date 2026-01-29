@@ -3,7 +3,7 @@
 rm(list = ls())
 gc()
 
-pg <- c('ggplot2', 'dplyr', 'patchwork',  'data.table', 'patchwork','DESeq2', 
+pg <- c('ggplot2', 'dplyr', 'patchwork',  'data.table', 'DESeq2', 
   'edgeR', 'GSVA', 'GSEABase', 'mclust', 'ggridges', 'Seurat', 'ggthemes')
 for(i in pg){
     suppressMessages(library(i, character.only = T))
