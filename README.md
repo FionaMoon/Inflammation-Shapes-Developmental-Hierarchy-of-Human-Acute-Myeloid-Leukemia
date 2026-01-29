@@ -1,6 +1,6 @@
-# RBM47-Driven Cell-Intrinsic Inflammation Shapes the Developmental Hierarchy of Human Acute Myeloid Leukemia
+# RBM47-driven Leukemic Cell-intrinsic Inflammation Shapes the Developmental Hierarchy of Human Acute Myeloid Leukemia
 
-This repository contains analysis scripts and processed datasets corresponding to the primary figures of the research [RBM47-driven cell-intrinsic inflammation shapes the developmental hierarchy of human acute myeloid leukemia]()
+This repository contains analysis scripts and processed datasets corresponding to the primary figures of the research [RBM47-driven Leukemic Cell-intrinsic Inflammation Shapes the Developmental Hierarchy of Human Acute Myeloid Leukemia]()
 
 The repository is structured to ensure transparency, reproducibility, and reusability of the computational analyses supporting this study.
 
