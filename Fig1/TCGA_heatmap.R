@@ -1,81 +1,108 @@
 rm(list = ls())
 gc()
 
-setwd("D:/xx/Sequencing_Analysis/LAML")
+setwd("D:/Sequencing_Analysis/BeatAML")
 
-
-# Load necessary libraries
+############################
+## Load libraries
+############################
 library(ComplexHeatmap)
 library(dplyr)
 library(grid)
 library(data.table)
+library(RColorBrewer)
 
+############################
+## Load data
+############################
+data <- fread("./decon_clinical_order.csv", data.table = FALSE)
 
-load("./TCGA_Clinic_and_decon_mye.RData")
+############################
+## Inflammation quantiles (replace FAB)
+############################
+inflam <- data$GOBP_INFLAMMATORY_RESPONSE
 
-FAB_color = c(
-  "M0" = "#1f77b4",  # Blue
-  "M1" = "#ff7f0e",  # Orange
-  "M2" = "#2ca02c",  # Green
-  "M3" = "#d62728",  # Red
-  "M4" = "#9467bd",  # Purple
-  "M5" = "#8c564b",  # Brown
-  "M6" = "#e377c2",  # Pink
-  "M7" = "#7f7f7f"   # Gray
+Inflam_group <- cut(
+  inflam,
+  breaks = quantile(inflam, probs = c(0, 0.25, 0.5, 0.75, 1), na.rm = TRUE),
+  include.lowest = TRUE,
+  labels = c("0–25%", "25–50%", "50–75%", "75–100%")
 )
 
-# Create bar annotations for Inflammation, with FAB color applied
-names(clinical_data$GOBP_INFLAMMATORY_RESPONSE) <- clinical_data$FAB
+data$Inflam_group <- Inflam_group
+Inflam_color <- brewer.pal(9, "PuRd")[c(2,3,5,6)]
+# Inflam_color <- c("#FFEDA0", "#FEB24C", "#FD8D3C", "#FC4E2A")
+names(Inflam_color) <- levels(Inflam_group)
 
+############################
+## Remove unused immune types
+############################
+data <- data %>% select(!c("NK","MEP_Ery", "CD4 T", "CD8 T", "B"))
 
-# Create the named color annotation for FAB
-FAB <- rowAnnotation(
-  FAB = as.factor(clinical_data$FAB),
-  col = list(FAB = FAB_color)
-)
+############################
+## Rename immune columns
+############################
+colnames(data)[5:9] <- c("LSPC", "DC", "GMP-like", "ProMono-like", "Mono")
 
-# Create stacked barplot annotations using the immune cell data
+############################
+## Immune cell colors (unchanged)
+############################
 immune_colors <- c(
-  "DC" = "#8E7CC3",          # Gray for DCs
-  "Mono" = "#AC71B5",       # Pink for Monocytes
-  "ProMono-like" = "#CCB7E2", # Purple for ProMono-like cells
-  "GMP-like" = "#377eb8",   # Orange for GMP-like
-  "LSPC" = "#EE7576"       # Brown for LSPC
+  "DC"           = "#8E7CC3",
+  "Mono"         = "#AC71B5",
+  "ProMono-like" = "#CCB7E2",
+  "GMP-like"     = "#377eb8",
+  "LSPC"         = "#EE7576"
 )
 
-# Define the desired order of cell types
-desired_order <- c("DC", "Mono", "ProMono-like","GMP-like", "LSPC")
+############################
+## Desired order
+############################
+desired_order <- c("DC", "Mono", "ProMono-like", "GMP-like", "LSPC")
 
+immune_cell_data <- data[, desired_order]
+immune_cell_data <- round(immune_cell_data / rowSums(immune_cell_data), 4)
 
-# Reorder the columns of immune_cell_data
-immune_cell_data <- immune_cell_data[, desired_order]
-
-# Create stacked barplot annotation with custom colors
+############################
+## Stacked barplot + inflammation line
+############################
 stacked_barplot <- rowAnnotation(
- foo = anno_barplot(
+  Immune = anno_barplot(
     immune_cell_data,
-    gp = gpar(fill = immune_colors),  # Apply the custom colors
-    # axis_param = list(direction = "reverse"),
+    gp = gpar(fill = immune_colors),
     bar_width = 1,
-    ylim = c(0, 1)  # Set the y-axis limits for proportion data
+    ylim = c(0, 1)
   ),
-   Inflammation = anno_lines(
-    clinical_data$GOBP_INFLAMMATORY_RESPONSE,  # Inflammation data for lines
-    add_points = TRUE, 
+
+  Inflammation = anno_lines(
+    inflam,
+    add_points = TRUE,
     size = unit(1.2, "mm"),
-    pt_gp = gpar(col = FAB_color[as.factor(clinical_data$FAB)]),  # Use gpar to set point colors
-    gp = gpar(col = "black"),  # Line color (you can customize this)
-    smooth = TRUE  # Smooth the lines
+    pt_gp = gpar(col = Inflam_color[Inflam_group]),
+    gp = gpar(col = "black"),
+    smooth = TRUE
   ),
-  height = unit(12, "cm"), ## only change height of complex annotation, simple anno won't work
-  width = unit(4, "cm")
+
+  height = unit(16, "cm"),
+  width  = unit(4, "cm")
 )
 
-# Combine the annotations using c()
-# ha_list <-   stacked_barplot + FAB + ha
-ha_list <-   stacked_barplot + FAB
+############################
+## Inflammation group annotation (FAB-style replacement)
+############################
+Inflam_anno <- rowAnnotation(
+  Inflam_group = as.factor(data$Inflam_group),
+  col = list(Inflam_group = Inflam_color)
+)
 
-# Draw the combined annotations
-pdf(file = "./immune_TCGA_20251015.pdf", width = 6, height = 8)
-  draw(ha_list)
+############################
+## Combine annotations
+############################
+ha_list <- stacked_barplot + Inflam_anno
+
+############################
+## Draw
+############################
+pdf(file = "./immune_BEATAML_20260128_test.pdf", width = 6, height = 8)
+draw(ha_list)
 dev.off()
