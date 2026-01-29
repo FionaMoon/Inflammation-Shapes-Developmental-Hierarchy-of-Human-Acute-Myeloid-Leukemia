@@ -1,4 +1,20 @@
 # inflammation Score has been calculated by previous like the following
+rm(list = ls())
+gc()
+
+library(Seurat)
+library(ggplot2)
+library(ggprism)
+library(dplyr)
+library(data.table)
+library(scCustomize)
+
+
+setwd("D:/Sequencing_Analysis/2023_Pei_CD")
+list.files(pattern = ".Rds")
+
+## scRNA-seq data
+sc <- readRDS("./ssp_scArches_with_MACS_Myeloid.Rds")
 
 # scRNA-seq
 # DEG LSPC-Quiescent vs Mono-like
