@@ -17,7 +17,7 @@ c35 <- c(
   '#b33939','#84817a','#cc8e35','#33d9b2'
 )
 
-setwd("D:/备份盘/PeiLab/工作/刘丽娜老师/eCLIP/20250904-RBM47_reproducible_enriched_windows")
+setwd("D:/eCLIP/20250904-RBM47_reproducible_enriched_windows")
 
 list.files(pattern = ".csv")
 
@@ -115,4 +115,5 @@ ggplot(df_long, aes(x = Sample, y = Percent, fill = feature_type_top)) +
   labs(x = "", y = "Percentage", fill = "Feature type") +
   theme_few(base_size = 14) +
   coord_polar("y", start=0)
+
 dev.off()
