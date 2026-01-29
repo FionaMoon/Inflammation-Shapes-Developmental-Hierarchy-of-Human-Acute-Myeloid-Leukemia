@@ -9,7 +9,7 @@ library(data.table)
 library(dplyr)
 
 ## set working dir
-setwd("D:/备份盘/PeiLab/工作/刘丽娜老师/Sequencing_Analysis")
+setwd("D:/Sequencing_Analysis")
 
 # Load RBPs
 RBPs <- fread("./LLN_Data/490_RBP_CRISPR_target.csv")$`Gene name`
@@ -17,7 +17,7 @@ RBPs <- unique(RBPs)
 
 
 # List of DEG data frames from different cohorts
-DEG_TCGA <- read.csv("./炎症相关/TCGALAML_Inflammation_High_vs_Low_DEG_all.csv")
+DEG_TCGA <- read.csv("./TCGALAML_Inflammation_High_vs_Low_DEG_all.csv")
 colnames(DEG_TCGA)[1] <- "gene"
 DEG_BEATAML <- read.csv("./BeatAML/BEATAML_Inflammation_High_vs_Low_DEG_all.csv")
 colnames(DEG_BEATAML)[1] <- "gene"
