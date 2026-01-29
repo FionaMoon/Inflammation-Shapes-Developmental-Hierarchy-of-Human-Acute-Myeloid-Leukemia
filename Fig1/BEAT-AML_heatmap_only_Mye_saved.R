@@ -1,7 +1,7 @@
 rm(list = ls())
 gc()
 
-setwd("D:/备份盘/PeiLab/工作/刘丽娜老师/Sequencing_Analysis/BeatAML")
+setwd("D:/PeiLab/Sequencing_Analysis/BeatAML")
 
 
 # Load necessary libraries
@@ -50,7 +50,7 @@ immune_colors <- c(
 )
 
 # Define the desired order of cell types
-desired_order <- c("DC", "Mono", "ProMono-like","GMP-like", "LSPC")
+desired_order <- c("DC", "Mono", "ProMono-like", "GMP-like", "LSPC")
 
 
 # Reorder the columns of immune_cell_data
@@ -86,3 +86,4 @@ ha_list <-   stacked_barplot + FAB
 pdf(file = "./immune_BEATAML_20251107.pdf", width = 6, height = 8)
   draw(ha_list)
 dev.off()
+
