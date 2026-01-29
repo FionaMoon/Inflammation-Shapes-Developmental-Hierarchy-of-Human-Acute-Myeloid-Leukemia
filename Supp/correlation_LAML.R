@@ -5,7 +5,7 @@
 rm(list = ls())
 gc()
 
-setwd("D:/备份盘/PeiLab/工作/刘丽娜老师/Sequencing_Analysis/LAML")
+setwd("D:/Sequencing_Analysis/LAML")
 
 
 ## Load packages
@@ -19,7 +19,7 @@ library(ggpubr)
 load("./Clinic_and_decon_mye.RData")
 
 
-celltypes <- c("LSPC","GMP-like",  "ProMono-like", "DC", "Mono")
+celltypes <- c("LSPC", "GMP-like",  "ProMono-like", "DC", "Mono")
 inflam_var <- "GOBP_INFLAMMATORY_RESPONSE"
 
 immune_colors <- c(
@@ -141,3 +141,4 @@ ggplot(
     y = "Cell fraction"
   )
 dev.off()
+
