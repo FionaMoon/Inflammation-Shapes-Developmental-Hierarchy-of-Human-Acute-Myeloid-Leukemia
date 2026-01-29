@@ -5,7 +5,7 @@
 rm(list = ls())
 gc()
 
-setwd("D:/备份盘/PeiLab/工作/刘丽娜老师/Sequencing_Analysis/BeatAML")
+setwd("D:/Sequencing_Analysis/BeatAML")
 
 ## Load packages
 library(tidyverse)
@@ -31,7 +31,7 @@ immune_colors <- c(
 )
 
 # Define the desired order of cell types
-celltypes <- c("LSPC","GMP-like",  "ProMono-like", "DC", "Mono")
+celltypes <- c("LSPC", "GMP-like",  "ProMono-like", "DC", "Mono")
 inflam_var <- "GOBP_INFLAMMATORY_RESPONSE"
 
 
@@ -130,3 +130,4 @@ ggplot(
     y = "Cell fraction"
   )
 dev.off()
+
