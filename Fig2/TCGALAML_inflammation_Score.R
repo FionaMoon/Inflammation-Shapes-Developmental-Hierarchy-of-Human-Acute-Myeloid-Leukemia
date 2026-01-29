@@ -3,13 +3,13 @@
 rm(list = ls())
 gc()
 
-pg <- c('ggplot2', 'dplyr', 'patchwork',  'data.table', 'patchwork','DESeq2', 
+pg <- c('ggplot2', 'dplyr', 'patchwork',  'data.table', 'patchwork', 'DESeq2', 
   'edgeR', 'GSVA', 'GSEABase', 'mclust', 'ggridges', 'Seurat', 'ggthemes')
 for(i in pg){
     suppressMessages(library(i, character.only = T))
 }
 
-setwd("/Volumes/UBUNTU 22_0/刘老师的数据")
+setwd("/Volumes/UBUNTU 22_0")
 
 ## get inflammation Score of TCGA LAML
 TCGA_clinical <- fread("./Sequencing_Analysis/LAML/ssgsea_clnical.csv", data.table =F)
