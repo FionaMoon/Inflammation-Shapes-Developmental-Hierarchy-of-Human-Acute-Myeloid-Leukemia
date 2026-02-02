@@ -17,18 +17,18 @@ options(Seurat.object.assay.version = "v5")
 options(future.globals.maxSize = 10 * 1e9)
 
 ## set path
-D_path = "D:/备份盘/PeiLab/工作/刘丽娜老师/supple填充"
-F_path = "D:/备份盘/PeiLab/工作/刘丽娜老师/supple填充"
+D_path = "D:/supple_Fig"
+F_path = "D:/supple_Fig"
 
 
 ## load data
-obj <- readRDS("D:/备份盘/PeiLab/工作/刘丽娜老师/Sequencing_Analysis/2023_Pei_CD/ssp_scArches_with_MACS.Rds")
+obj <- readRDS("D:/Sequencing_Analysis/2023_Pei_CD/ssp_scArches_with_MACS.Rds")
 Idents(obj) <- "scArches_Cluster"
 obj <- subset(obj, idents = "unknown", invert =T)
 celltype_order <- c('LSPC-Quiescent',  'LSPC-Primed', 'LSPC-Cycle',
-'GMP-like', 'ProMono-like', 'Mono-like', 'cDC-like','MEP',
+'GMP-like', 'ProMono-like', 'Mono-like', 'cDC-like', 'MEP',
 'pre/pro-B', 'B', 'Plasma',
-'CD4 T', 'CD8 T','NK')
+'CD4 T', 'CD8 T', 'NK')
 obj$scArches_Cluster <- factor(as.character(obj$scArches_Cluster), 
 levels = rev(celltype_order))              
 
@@ -44,7 +44,7 @@ dendritic_cells = c('IL3RA',  'CD1C','HLA-DPB1','HLA-DQA1' ,'ITGAX','FCER1A', 'C
 Natural_killer_cell = c('GZMB',"NKG7",'NCAM1','GNLY','NCR1') # NK 
 Palate = c('PPBP','PF4','GATA2','ITGA2B','ITGB3') # Mk  # Palate
 stem_cell = c('CD34','CD38', 'SPINK2','CRHBP', 'NR4A1', 'RGS18', 'CNRIP1') # HSPC
-GMP = c('AZU1','MPO','ELANE')
+GMP = c('AZU1', 'MPO', 'ELANE')
 ## MkP / ErP / MEP
 ## SPINK2: CMP +
 ## CRHBP: CMP / MEP +
@@ -106,6 +106,7 @@ table(obj$scArches_Cluster)
 
 
 ## DEG of each cluster 
+
 
 
 
