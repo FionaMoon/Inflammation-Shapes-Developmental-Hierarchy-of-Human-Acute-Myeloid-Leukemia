@@ -8,11 +8,9 @@ for(i in pg){
     suppressMessages(library(i, character.only = T))
 }
 
-source("D:/GitHub/Small_Program/FACS_R/scDataviz/Flowjo_newFunction.R")
-
 D_path = "D:/xx/Sequencing_Analysis/BeatAML"
 
-Exp_auc_prot <- fread("D:/GitHub/EAGLE/data/BeatAML/自下载/RNA-seq_raw_has_Ven_AUC_ProteinCoding.csv", data.table = F)
+Exp_auc_prot <- fread("D:/GitHub/EAGLE/data/BeatAML/RNA-seq_raw_has_Ven_AUC_ProteinCoding.csv", data.table = F)
 rownames(Exp_auc_prot) <- Exp_auc_prot$display_label
 Exp_auc_prot[1:3,1:6]
 Exp_auc_prot <- Exp_auc_prot[,-c(1:4)]
@@ -131,7 +129,7 @@ table(gsva_scores$mannual_define_info)
 
 gsva_scores <- gsva_scores %>% dplyr::filter(mannual_define_info %in% c("Negative", "Positive"))
 
-Drug_IC_RNA_VEN <- fread("D:/GitHub/EAGLE/data/BeatAML/自下载/Drug_auc_Venetoclax.csv", data.table = F)
+Drug_IC_RNA_VEN <- fread("D:/GitHub/EAGLE/data/BeatAML/Drug_auc_Venetoclax.csv", data.table = F)
 rownames(Drug_IC_RNA_VEN) <- Drug_IC_RNA_VEN$R_ID
 meta <- Drug_IC_RNA_VEN[rownames(gsva_scores),]
 table(meta$Venetoclax)
@@ -163,3 +161,4 @@ pdf("D:/xx/Sequencing_Analysis/BeatAML/boxplot.pdf", width = 6,height =4)
         stat_compare_means(comparisons = list(c("Negative", "Positive")), 
         label = "p.signif")
 dev.off()
+
